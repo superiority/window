@@ -1,10 +1,11 @@
-Element.prototype.appendAfter = function(element) {
+Element.prototype.appendAfter = function (element) {
     element.parentNode.insertBefore(this, element.nextSibling)
 }
 
-function noop() {}
+function noop() {
+}
 
-function _createModalFooter(buttons = [] ) {
+function _createModalFooter(buttons = []) {
     if (buttons.length === 0) {
         return document.createElement('div')
     }
@@ -36,10 +37,11 @@ function _createModal(options) {
              ${options.closable ? `<span class="modal-close" onclick="closeModal()">&times;</span>` : ''}
            </div>
            <div class="modal-body" data-content>
-           ${options.content || '' }
+           ${options.content || ''}
           </div>
         </div>
     </div>`)
+
     const footer = _createModalFooter(options.footerButtons)
     footer.appendAfter(modal.querySelector('[data-content]'))
     document.body.appendChild(modal)
@@ -47,17 +49,17 @@ function _createModal(options) {
         e.stopPropagation()
     })
 
-
     return modal
 }
 
-function openModal() {
+function openModal(id) {
+    let car = array.find(value => value.id === id)
+    modal.setContent(`Price: ` + car.price)
     modal.open()
 }
 
 function closeModal() {
     modal.close()
-
 }
 
 $.modal = function (options) {
